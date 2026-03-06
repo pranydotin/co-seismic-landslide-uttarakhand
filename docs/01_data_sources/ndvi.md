@@ -28,9 +28,22 @@ https://sentinels.copernicus.eu/web/sentinel/missions/sentinel-2
 
 ## NDVI Computation
 
-NDVI was calculated using the standard normalized difference formula:
+NDVI was calculated using the standard normalized difference vegetation index formula:
 
-NDVI = (B8 − B4) / (B8 + B4)
+$$
+NDVI = \frac{NIR - Red}{NIR + Red}
+$$
+
+For Sentinel-2 imagery, the bands correspond to:
+
+$$
+NDVI = \frac{B8 - B4}{B8 + B4}
+$$
+
+Where:
+
+- **B8** = Near Infrared (NIR) band
+- **B4** = Red band
 
 The calculation was performed using raster operations in QGIS/Python after extracting the required spectral bands.
 
