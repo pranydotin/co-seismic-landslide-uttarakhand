@@ -3,7 +3,7 @@
 ## Dataset Overview
 
 The Digital Elevation Model (DEM) represents the elevation of the terrain surface for the study area.
-It provides the base dataset required for deriving terrain parameters such as slope and curvature.
+It provides the base dataset required for deriving terrain parameters such as slope, aspect, curvature, flow accumulation, and topographic wetness index.
 
 ---
 
@@ -45,24 +45,40 @@ Higher slope values generally indicate steeper terrain, which is more susceptibl
 
 ---
 
-## QGIS Processing
+## Processing
 
-Slope was derived from the DEM using the QGIS terrain analysis tool:
+Slope was derived from the DEM using terrain analysis tools:
 
 ```
-Raster → Terrain Analysis → Slope
+Terrain Analysis → Morphometry → Slope, Aspect, Curvature
 ```
-
-Parameters used:
-
-- **Input layer:** DEM_UK
-- **Z-factor:** 1
-- **Output unit:** Degrees
 
 The resulting raster was saved as:
 
 ```
 slope.tif
+```
+
+---
+
+# Aspect
+
+## Description
+
+Aspect represents the direction that a slope faces relative to north. It influences solar radiation, soil moisture, and vegetation distribution.
+
+These environmental factors can indirectly affect slope stability and landslide occurrence.
+
+---
+
+## Processing
+
+Aspect was generated using the same terrain morphometry tool.
+
+Output file:
+
+```
+aspect.tif
 ```
 
 ---
@@ -83,10 +99,8 @@ It influences the acceleration and deceleration of surface runoff along the slop
 
 ### Processing
 
-Profile curvature was generated using the SAGA terrain analysis tools in QGIS:
-
 ```
-Processing Toolbox → SAGA → Terrain Analysis → Slope, Aspect, Curvature
+Terrain Analysis → Morphometry → Slope, Aspect, Curvature
 ```
 
 Output file:
@@ -99,13 +113,13 @@ profile_curvature.tif
 
 ## Plan Curvature
 
-Plan curvature measures curvature **perpendicular to the slope direction**.
+Plan curvature represents the curvature of the terrain perpendicular to the slope direction.
 
 It controls the convergence and divergence of water flow across the terrain surface.
 
 ### Processing
 
-Plan curvature was generated using the same SAGA terrain analysis tool in QGIS.
+Plan curvature was generated using the same SAGA terrain analysis tool.
 
 Output file:
 
@@ -115,17 +129,129 @@ plan_curvature.tif
 
 ---
 
+# Flow Accumulation
+
+## Description
+
+Flow accumulation represents the amount of upstream contributing area flowing into each grid cell. Cells with high flow accumulation values typically correspond to drainage channels or valley bottoms.
+
+This parameter is important for identifying water concentration zones.
+
+---
+
+## Processing
+
+Before calculating flow accumulation, sinks in the DEM were filled to ensure proper drainage flow.
+
+```
+Terrain Analysis → Preprocessing → Fill Sinks (Wang & Liu)
+```
+
+Flow accumulation was then calculated from the filled DEM.
+
+```
+Terrain Analysis → Hydrology → Flow Accumulation
+```
+
+Output file:
+
+```
+flow_accumulation.tif
+```
+
+---
+
+# Topographic Wetness Index (TWI)
+
+## Description
+
+The Topographic Wetness Index represents the spatial distribution of soil moisture based on terrain shape and drainage patterns.
+
+The index is calculated as:
+
+$$
+TWI = \ln \left(\frac{A_s}{\tan \beta}\right)
+$$
+
+Where:
+
+- $A_s$ = specific catchment area
+- $β$ = slope angle
+
+Higher $TWI$ values generally indicate wetter areas such as valleys and drainage lines.
+
+---
+
+## Processing
+
+TWI was calculated using the slope and flow accumulation layers.
+
+```
+Terrain Analysis → Hydrology → Topographic Wetness Index
+```
+
+Output file:
+
+```
+twi.tif
+```
+
+---
+
+# Terrain Ruggedness Index (TRI)
+
+## Description
+
+Terrain Ruggedness Index measures the amount of elevation difference between a grid cell and its surrounding cells. It quantifies the roughness or ruggedness of terrain.
+
+The index is calculated as:
+
+$$
+TRI = \left(\sum (E_c - E_i)^2 \right)^2
+$$
+
+Where:
+
+- $E_c$ = elevation of the central cell
+- $E_i$ = elevation of neighboring cells
+
+High TRI values typically correspond to rugged mountainous areas.
+
+---
+
+## Processing
+
+TRI was calculated from the DEM using terrain analysis tools.
+
+```
+Terrain Analysis → Morphometry → Terrain Ruggedness Index
+```
+
+Output file:
+
+```
+tri.tif
+```
+
+---
+
 ## Role in Study
 
 ### DEM
 
-The Digital Elevation Model provides the fundamental terrain representation of the study area. It serves as the base dataset from which other terrain derivatives such as slope and curvature are calculated. Elevation also influences climatic conditions, vegetation distribution, and geomorphological processes that may affect landslide occurrence.
+The Digital Elevation Model provides the fundamental representation of terrain elevation in the study area. It serves as the base dataset from which all other terrain derivatives such as slope, aspect, curvature, and hydrological indices are calculated.
 
 ---
 
 ### Slope
 
-Slope represents the steepness of the terrain and is one of the most important factors influencing landslides. Steeper slopes experience higher gravitational stress, which increases the likelihood of slope instability and mass movement.
+Slope represents the steepness of the terrain. Areas with steeper slopes are generally more susceptible to landslides due to increased gravitational forces acting on soil and rock materials.
+
+---
+
+## Aspect
+
+Aspect indicates the direction that a slope faces. It influences microclimatic conditions such as solar radiation, soil moisture, and vegetation cover, which can indirectly affect slope stability.
 
 ---
 
@@ -138,3 +264,21 @@ Profile curvature describes the curvature of the terrain along the direction of 
 ### Plan Curvature
 
 Plan curvature represents the curvature of the terrain perpendicular to the slope direction. It controls the convergence and divergence of surface flow. Areas with converging flow tend to accumulate water and sediments, which can increase landslide susceptibility.
+
+---
+
+## Flow Accumulation
+
+Flow accumulation represents the amount of upstream contributing area flowing into a grid cell. High values typically correspond to drainage channels and valley bottoms where water accumulates.
+
+---
+
+## Topographic Wetness Index (TWI)
+
+The Topographic Wetness Index indicates the spatial distribution of soil moisture based on terrain shape and drainage patterns. Areas with higher TWI values are more likely to experience water saturation.
+
+---
+
+## Terrain Ruggedness Index (TRI)
+
+Terrain Ruggedness Index measures the variability in elevation between a cell and its surrounding cells. Higher TRI values indicate more rugged terrain, which can influence slope stability and erosion processes.
