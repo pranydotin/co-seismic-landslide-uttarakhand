@@ -14,7 +14,7 @@ It provides the base dataset required for deriving terrain parameters such as sl
 - **Access Platform:** USGS EarthExplorer
 - **Data Format:** GeoTIFF
 - **Spatial Resolution:** 30 meters
-- **Projection:** UTM Zone 44N (EPSG:32644)
+- **Projection:** UTM Zone 44N (`EPSG:32644`)
 
 ---
 
@@ -27,11 +27,7 @@ The DEM data were processed in QGIS using the following steps:
 3. Reprojecting the DEM to UTM Zone 44N (EPSG:32644).
 4. Clipping the DEM using the Uttarakhand administrative boundary shapefile.
 
-The processed DEM was saved as:
-
-```
-DEM_UK.tif
-```
+The processed DEM was saved as: `DEM_UK.tif`
 
 ---
 
@@ -54,10 +50,7 @@ Terrain Analysis → Morphometry → Slope, Aspect, Curvature
 ```
 
 The resulting raster was saved as:
-
-```
-slope.tif
-```
+`slope.tif`
 
 ---
 
@@ -73,13 +66,35 @@ These environmental factors can indirectly affect slope stability and landslide 
 
 ## Processing
 
-Aspect was generated using the same terrain morphometry tool.
+Aspect was generated from the DEM using terrain morphometry tools.
+
+```
+Terrain Analysis → Morphometry → Slope, Aspect, Curvature
+```
 
 Output file:
+`aspect.tif`
 
-```
-aspect.tif
-```
+Since the original aspect raster contains continuous values ranging from **0° to 360°**, it was reclassified into categorical directional classes using the QGIS Raster Calculator.
+
+The classification scheme used was:
+
+| Value | Direction |
+| ----- | --------- |
+| 0     | Flat      |
+| 1     | North     |
+| 2     | Northeast |
+| 3     | East      |
+| 4     | Southeast |
+| 5     | South     |
+| 6     | Southwest |
+| 7     | West      |
+| 8     | Northwest |
+
+The reclassified raster was saved as:
+`aspect_class.tif`
+
+This categorical representation is commonly used in landslide susceptibility studies to simplify interpretation and statistical modelling.
 
 ---
 
@@ -103,11 +118,7 @@ It influences the acceleration and deceleration of surface runoff along the slop
 Terrain Analysis → Morphometry → Slope, Aspect, Curvature
 ```
 
-Output file:
-
-```
-profile_curvature.tif
-```
+Output file: `profile_curvature.tif`
 
 ---
 
@@ -121,11 +132,7 @@ It controls the convergence and divergence of water flow across the terrain surf
 
 Plan curvature was generated using the same SAGA terrain analysis tool.
 
-Output file:
-
-```
-plan_curvature.tif
-```
+Output file: `plan_curvature.tif`
 
 ---
 
@@ -153,11 +160,7 @@ Flow accumulation was then calculated from the filled DEM.
 Terrain Analysis → Hydrology → Flow Accumulation
 ```
 
-Output file:
-
-```
-flow_accumulation.tif
-```
+Output file:`flow_accumulation.tif`
 
 ---
 
@@ -190,11 +193,7 @@ TWI was calculated using the slope and flow accumulation layers.
 Terrain Analysis → Hydrology → Topographic Wetness Index
 ```
 
-Output file:
-
-```
-twi.tif
-```
+Output file: `twi.tif`
 
 ---
 
@@ -227,11 +226,7 @@ TRI was calculated from the DEM using terrain analysis tools.
 Terrain Analysis → Morphometry → Terrain Ruggedness Index
 ```
 
-Output file:
-
-```
-tri.tif
-```
+Output file:tri.tif`
 
 ---
 
