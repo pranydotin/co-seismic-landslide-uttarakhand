@@ -24,7 +24,7 @@ This dataset was derived from the HydroRIVERS dataset and is used to quantify th
 The HydroRIVERS dataset was processed in QGIS and prepared for analysis using the following steps:
 
 1. Loading the HydroRIVERS dataset from the File Geodatabase.
-2. Filtering the river network using the stream order attribute (`ORD_STRA <= 3`) to retain major and medium river channels.
+2. Filtering the river network using the stream order attribute (`ORD_STRA <= 6`) to retain major and medium river channels.
 3. Creating a buffer around the Uttarakhand boundary to preserve river segments near the edges of the study area.
 4. Clipping the river network using the buffered boundary.
 5. Reprojecting the clipped river layer to UTM Zone 44N (EPSG:32644).
