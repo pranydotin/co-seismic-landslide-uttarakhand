@@ -42,6 +42,7 @@ The distance to rivers raster was generated using raster-based proximity analysi
 The workflow included:
 
 - Rasterization of buffered river features using a burn value of 1.
+- **NoData correction:** After rasterization, river pixels were incorrectly assigned NoData values instead of the intended burn value. A Python script using GDAL was applied via the QGIS Python Console to replace all NoData values with 0, restoring valid pixel values at river locations before proximity computation.
 - Computation of Euclidean distance from river pixels.
 - Generation of a continuous raster where each pixel represents distance to the nearest river in meters.
 

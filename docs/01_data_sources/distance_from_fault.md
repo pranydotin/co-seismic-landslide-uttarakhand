@@ -40,6 +40,7 @@ The distance to faults raster was generated using raster-based proximity analysi
 The workflow included:
 
 - Rasterization of fault features with a burn value of 1.
+- **NoData correction:** After rasterization, fault pixels were incorrectly assigned NoData values instead of the intended burn value. A Python script using GDAL was applied via the QGIS Python Console to replace all NoData values with 0, restoring valid pixel values at fault locations before proximity computation.
 - Computation of Euclidean distance from fault pixels using the Proximity tool.
 - Use of georeferenced units to ensure distance values are calculated in meters.
 - Generation of a continuous raster where each pixel represents distance to the nearest fault.

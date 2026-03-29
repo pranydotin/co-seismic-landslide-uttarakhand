@@ -40,6 +40,7 @@ The distance to roads raster was generated using raster-based proximity analysis
 The workflow included:
 
 - Rasterization of road features using a burn value of 1.
+- **NoData correction:** After rasterization, road pixels were incorrectly assigned NoData values instead of the intended burn value. A Python script using GDAL was applied via the QGIS Python Console to replace all NoData values with 0, restoring valid pixel values at road locations before proximity computation.
 - Computation of Euclidean distance from road pixels using the Proximity tool.
 - Generation of a continuous raster where each pixel represents distance to the nearest road in meters.
 
