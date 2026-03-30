@@ -1,9 +1,11 @@
-# Silt Content — Frequency Ratio Classification
+# Silt Content — Factor Classification
 
 ## Overview
+
 Silt content influences soil permeability, water retention, and susceptibility to liquefaction under saturated conditions. Silt-dominated soils have lower hydraulic conductivity than sandy soils, causing water to accumulate within the profile and elevate pore-water pressure — a primary driver of slope failure.
 
 ## Data Description
+
 - **Type:** Continuous raster
 - **Unit:** Percentage (%)
 - **Source:** HWSD2 (Harmonised World Soil Database v2)
@@ -14,13 +16,13 @@ Silt content influences soil permeability, water retention, and susceptibility t
 
 Silt was classified into 5 classes based on equal-interval breaks across the study area data range:
 
-| Class | Range (%) | Description |
-|-------|-----------|-------------|
-| 1 | < 20 | Low silt — predominantly sand/clay matrix |
-| 2 | 20 – 25 | Moderately low silt |
-| 3 | 25 – 30 | Moderate silt content |
-| 4 | 30 – 35 | Moderately high silt |
-| 5 | ≥ 35 | High silt — elevated water retention risk |
+| Class | Range (%) | Description                               |
+| ----- | --------- | ----------------------------------------- |
+| 1     | < 20      | Low silt — predominantly sand/clay matrix |
+| 2     | 20 – 25   | Moderately low silt                       |
+| 3     | 25 – 30   | Moderate silt content                     |
+| 4     | 30 – 35   | Moderately high silt                      |
+| 5     | ≥ 35      | High silt — elevated water retention risk |
 
 ## Raster Calculator Expression (QGIS)
 
@@ -33,10 +35,12 @@ Silt was classified into 5 classes based on equal-interval breaks across the stu
 ```
 
 ## Output Settings
-- **Output file:** `FR_silt.tif`
+
+- **Output file:** `silt_class.tif`
 - **Data type:** Int16
 - **Compression:** DEFLATE
 - **Purpose:** Temporary — used only for LSI computation. Delete after non-landslide points are generated.
 
 ## Interpretation
+
 Higher silt content classes increase water retention within the soil profile, reducing drainage efficiency and promoting pore-water pressure build-up during rainfall events — conditions conducive to shallow translational landslides.
