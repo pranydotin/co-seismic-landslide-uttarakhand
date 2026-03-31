@@ -1,4 +1,4 @@
-# Soil Organic Carbon (SOC) — Factor Classification
+# Soil Organic Carbon (SOC) — Factor Classification (Initial Feature)
 
 ## Overview
 
@@ -38,8 +38,16 @@ SOC was classified into 5 classes using threshold-based breaks derived from the 
 - **Output file:** `soc_class.tif`
 - **Data type:** Int16
 - **Compression:** DEFLATE
-- **Purpose:** Temporary — used only for LSI computation. Delete after non-landslide points are generated.
+- **Purpose:** Intermediate — evaluated for use in LSI computation but excluded after Frequency Ratio (FR) analysis due to instability
 
 ## Interpretation
 
 Lower SOC classes indicate degraded soils with reduced binding capacity, increasing susceptibility to erosion and shallow failure. Higher SOC classes generally correspond to more stable, well-structured soils, though this relationship may vary with local lithology and land use.
+
+## Note on Feature Usage
+
+Although this variable was derived and classified as part of the initial feature set, it was excluded from the final landslide susceptibility model.
+
+Frequency Ratio (FR) analysis revealed unstable and physically unrealistic values, primarily due to highly skewed distributions and sparse landslide occurrences within certain classes. These effects were further amplified in high-altitude regions where soil properties are poorly represented or absent.
+
+To ensure model robustness and avoid bias, this feature was not included in the final LSI computation. Soil conditions were instead represented using categorical soil mapping units (SMU).

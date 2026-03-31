@@ -1,4 +1,4 @@
-# Clay Content — Factor Classification
+# Clay Content — Factor Classification (Initial Feature)
 
 ## Overview
 
@@ -41,8 +41,16 @@ Clay content in the study area falls within a narrow range (approximately 15–2
 - **Output file:** `clay_class.tif`
 - **Data type:** Int16
 - **Compression:** DEFLATE
-- **Purpose:** Temporary — used only for LSI computation. Delete after non-landslide points are generated.
+- **Purpose:** Intermediate — evaluated for use in LSI computation but excluded after Frequency Ratio (FR) analysis due to instability
 
 ## Interpretation
 
 Higher clay classes (4–5) indicate soils with restricted drainage and elevated pore-water pressure potential during rainfall events, increasing susceptibility to shallow translational failures. The effect of clay is most pronounced when combined with steep slope gradients and high TWI values.
+
+## Note on Feature Usage
+
+Although this variable was derived and classified as part of the initial feature set, it was excluded from the final landslide susceptibility model.
+
+Frequency Ratio (FR) analysis revealed unstable and physically unrealistic values, primarily due to highly skewed distributions and sparse landslide occurrences within certain classes. These effects were further amplified in high-altitude regions where soil properties are poorly represented or absent.
+
+To ensure model robustness and avoid bias, this feature was not included in the final LSI computation. Soil conditions were instead represented using categorical soil mapping units (SMU).

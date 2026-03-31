@@ -2,7 +2,8 @@
 
 ## Dataset Overview
 
-Soil texture and organic carbon were derived from the **Harmonized World Soil Database v2 (HWSD2)**.
+Soil texture and organic carbon were derived from the **Harmonized World Soil Database v2 (HWSD2)** and initially considered as conditioning factors for landslide susceptibility analysis.
+
 These variables describe the physical and chemical properties of soil that influence infiltration, drainage, and slope stability, which are important factors in landslide susceptibility.
 
 ---
@@ -153,9 +154,11 @@ This confirmed the integrity of the soil texture fractions after aggregation.
 
 ---
 
-## Role in Study
+## Role in Study (Initial Consideration)
 
 ### Clay
+
+_(Not used in final model; excluded after FR analysis)_
 
 Clay content represents the proportion of fine soil particles.
 Higher clay content generally reduces soil permeability and increases water retention.
@@ -165,6 +168,8 @@ Excess water accumulation can weaken soil structure and increase landslide susce
 
 ### Sand
 
+_(Not used in final model; excluded after FR analysis)_
+
 Sand represents the coarse fraction of soil particles.
 Higher sand content typically increases soil permeability and drainage capacity.
 However, sandy soils may have lower cohesion, which can influence slope stability under certain conditions.
@@ -173,6 +178,8 @@ However, sandy soils may have lower cohesion, which can influence slope stabilit
 
 ### Silt
 
+_(Not used in final model; excluded after FR analysis)_
+
 Silt consists of medium-sized soil particles and contributes to soil structure and moisture retention.
 High silt content can increase soil erodibility and reduce slope stability under saturated conditions.
 
@@ -180,5 +187,35 @@ High silt content can increase soil erodibility and reduce slope stability under
 
 ### Soil Organic Carbon (SOC)
 
+_(Not used in final model; excluded after FR analysis)_
+
 Soil organic carbon reflects the amount of organic matter present in the soil.
 Higher organic carbon levels improve soil aggregation and structure, which can enhance slope stability and reduce erosion.
+
+## Feature Selection and Exclusion
+
+Following the computation of Frequency Ratio (FR) values, soil property variables (clay, sand, silt, and soil organic carbon) exhibited unstable and physically unrealistic behavior.
+
+In particular, certain classes produced extremely high FR values due to sparse landslide occurrences and highly skewed distributions. This instability arises from the sensitivity of FR to small denominator values and uneven class representation.
+
+Additionally, in high-altitude regions of the study area, large portions of terrain consist of glaciers and exposed bedrock, where soil properties are either absent or poorly represented. This further reduces the reliability of continuous soil variables in the Himalayan context.
+
+Due to these limitations, continuous soil properties were excluded from further analysis to improve model robustness and reduce bias in susceptibility estimation.
+
+Instead, soil was represented using categorical soil mapping units (SMU) derived from the HWSD2 dataset, which provide a more stable and interpretable representation of soil conditions.
+
+## Soil Type Representation (Final Variable)
+
+To address the limitations of continuous soil properties, soil was represented using Soil Mapping Units (SMU) derived from the HWSD2 dataset.
+
+Each SMU represents a composite soil unit consisting of multiple soil components and their proportional distribution within a mapping unit.
+
+The SMU raster was used directly as a categorical variable, where each unique value corresponds to a distinct soil unit.
+
+This representation provides:
+
+- Stable class distribution
+- Reduced sensitivity to sparse landslide occurrences
+- Improved compatibility with Frequency Ratio (FR) analysis
+
+Unlike continuous soil fractions, SMU-based representation captures integrated soil characteristics and is more suitable for heterogeneous mountainous terrain.

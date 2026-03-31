@@ -1,4 +1,4 @@
-# Sand Content — Factor Classification
+# Sand Content — Factor Classification (Initial Feature)
 
 ## Overview
 
@@ -39,8 +39,16 @@ Sand was classified into 5 classes based on equal-interval breaks across the stu
 - **Output file:** `sand_class.tif`
 - **Data type:** Int16
 - **Compression:** DEFLATE
-- **Purpose:** Temporary — used only for LSI computation. Delete after non-landslide points are generated.
+- **Purpose:** Intermediate — evaluated for use in LSI computation but excluded after Frequency Ratio (FR) analysis due to instability
 
 ## Interpretation
 
 Very high sand content (class 5) indicates loose, low-cohesion soils that are prone to granular failure on steeper slopes. The relationship between sand content and landslide frequency is best understood in combination with slope gradient and TWI, as drainage capacity interacts strongly with terrain position.
+
+## Note on Feature Usage
+
+Although this variable was derived and classified as part of the initial feature set, it was excluded from the final landslide susceptibility model.
+
+Frequency Ratio (FR) analysis revealed unstable and physically unrealistic values, primarily due to highly skewed distributions and sparse landslide occurrences within certain classes. These effects were further amplified in high-altitude regions where soil properties are poorly represented or absent.
+
+To ensure model robustness and avoid bias, this feature was not included in the final LSI computation. Soil conditions were instead represented using categorical soil mapping units (SMU).
