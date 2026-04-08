@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 # ── 1. Load both files ──────────────────────────────────────────────────────
 pixels_df = pd.read_csv('./data/processed/combined_pixels.csv')
@@ -72,7 +73,10 @@ fr_df = pd.concat(all_results, ignore_index=True)
 fr_df = fr_df[['factor', 'class', 'Npix_i', 'Nls_i', 'N', 'S', 'FR']]
 fr_df = fr_df.sort_values(['factor', 'class']).reset_index(drop=True)
 
-# ── 6. Save ───────────────────────────────────────────────────────────────────
+# ── 6. ADD WEIGHT CALCULATION HERE 🔥 ────────────────────────────────────────
+fr_df['weight'] = np.log(fr_df['FR'].clip(lower=0.01))
+
+# ── 7. Save ───────────────────────────────────────────────────────────────────
 fr_df.to_csv('./data/processed/FR_results_features.csv', index=False)
 
 # ── 7. Print summary ──────────────────────────────────────────────────────────
@@ -85,4 +89,4 @@ for factor in fr_df['factor'].unique():
     print(f"\n--- {factor} ---")
     print(sub.to_string(index=False))
 
-print("\n Saved: FR_results_12features.csv")
+print("\n Saved: FR_results_features.csv")
