@@ -3,7 +3,7 @@ import pandas as pd
 # ── 1. Load both files ──────────────────────────────────────────────────────
 pixels_df = pd.read_csv('./data/processed/combined_pixels.csv')
 lands_df = pd.read_csv('./data/processed/landslide_points_sampled.csv',
-                       low_memory=False)
+                       low_memory=False, encoding='latin')
 
 # ── 2. Keep only 12 valid features (remove soil properties) ─────────────────
 # Removed: clay, sand, silt_soil, soc_soil (unreliable - rocky/glacier areas)
@@ -17,11 +17,14 @@ col_to_factor = {
     'twi_class1': 'twi',
     'tri_class1': 'tri',
     'ndvi_class1': 'ndvi',
-    'lulc_class1': 'unique_values_utm_lulc',
-    'proximity_roads_class': 'proximity_roads',
-    'proximity_rivers_class': 'proximity_rivers',
-    'proximity_fault_class': 'proximity_fault',
-    'soil_type1': 'soil_type'
+    'lulc_class1': 'utm_lulc',
+    'proximity_roads_class1': 'proximity_roads',
+    'proximity_rivers_class1': 'proximity_rivers',
+    'proximity_fault_class1': 'proximity_fault',
+    'soil_type1': 'soil_type',
+    'max_rainfall_class1': 'max_rainfall',
+    'mean_monsoon_class1': 'mean_monsoon',
+    'mean_rainfall_class1': 'mean_rainfall',
 }
 
 # ── 3. Constants ─────────────────────────────────────────────────────────────
