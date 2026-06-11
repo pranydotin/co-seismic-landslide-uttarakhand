@@ -10,7 +10,7 @@ All rasters were pre-processed to a uniform spatial resolution of **30 m × 30 m
 
 ## Tool
 
-**QGIS** — Reclassify by Table  
+**QGIS** — Reclassify by Table
 `Processing Toolbox → Raster Analysis → Reclassify by Table`
 
 ---
@@ -251,7 +251,7 @@ All 13 CSV files were merged into a single structured dataset using a Python scr
 | lulc | 10 | 395,627,798 |
 | ... | ... | ... |
 
-**Total rows:** 89 (sum of classes across all 13 factors)
+**Total rows:** 89 (sum of classes across all 16 conditioning factors)
 
 This file serves as the primary input for FR calculation alongside `landslide_points_sampled.csv`.
 
