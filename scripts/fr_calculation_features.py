@@ -3,7 +3,7 @@ import numpy as np
 
 # ── 1. Load both files ──────────────────────────────────────────────────────
 pixels_df = pd.read_csv('./data/processed/combined_pixels.csv')
-lands_df = pd.read_csv('./data/processed/landslide_points_sampled.csv',
+lands_df = pd.read_csv('./data/processed/landslide_points_sampled2.csv',
                        low_memory=False, encoding='latin')
 
 # ── 2. Keep only 12 valid features (remove soil properties) ─────────────────
@@ -22,10 +22,11 @@ col_to_factor = {
     'proximity_roads_class1': 'proximity_roads',
     'proximity_rivers_class1': 'proximity_rivers',
     'proximity_fault_class1': 'proximity_fault',
-    'soil_type1': 'soil_type',
+    # 'soil_type1': 'soil_type',
     'max_rainfall_class1': 'max_rainfall',
-    'mean_monsoon_class1': 'mean_monsoon',
+    'mean_monsoon_class1': 'monsoon_rainfall',
     'mean_rainfall_class1': 'mean_rainfall',
+    'log_flow_accumulation1': 'flow_accumulation',
 }
 
 # ── 3. Constants ─────────────────────────────────────────────────────────────
@@ -77,7 +78,7 @@ fr_df = fr_df.sort_values(['factor', 'class']).reset_index(drop=True)
 fr_df['weight'] = np.log(fr_df['FR'].clip(lower=0.01))
 
 # ── 7. Save ───────────────────────────────────────────────────────────────────
-fr_df.to_csv('./data/processed/FR_results_features.csv', index=False)
+fr_df.to_csv('./data/processed/FR_results_features1.csv', index=False)
 
 # ── 7. Print summary ──────────────────────────────────────────────────────────
 print("=" * 55)

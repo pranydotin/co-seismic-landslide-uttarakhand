@@ -23,11 +23,14 @@ raster_to_factor = {
     "twi_class": "twi",
     "tri_class": "tri",
     "ndvi_class": "ndvi",
-    "utm_lulc": "unique_values_utm_lulc",
+    "utm_lulc": "utm_lulc",
     "proximity_roads_class": "proximity_roads",
     "proximity_rivers_class": "proximity_rivers",
     "proximity_fault_class": "proximity_fault",
-    "utm_soil_type": "soil_class"
+    "utm_soil_type": "soil_class",
+    "mean_rainfall_class": "mean_rainfall",
+    "max_rainfall_class": "max_rainfall",
+    "mean_monsoon_class": "monsoon_rainfall",
 }
 
 # Load FR table
